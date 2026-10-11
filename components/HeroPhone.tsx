@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Phone from "./Phone";
 import type { Dict } from "@/lib/i18n";
 
@@ -8,7 +8,24 @@ type Answer = "none" | "yes" | "no";
 
 export default function HeroPhone({ t }: { t: Dict["hero"]["phone"] }) {
   const [answer, setAnswer] = useState<Answer>("none");
+  const [touched, setTouched] = useState(false);
   const confirmed = answer === "yes" ? 48 : 47;
+
+  // Until the visitor taps something, the phone demos itself: confirm, pause, reset, repeat.
+  useEffect(() => {
+    if (touched) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setTimeout(
+      () => setAnswer((a) => (a === "none" ? "yes" : "none")),
+      answer === "none" ? 2600 : 4800,
+    );
+    return () => window.clearTimeout(id);
+  }, [answer, touched]);
+
+  const reply = (a: Answer) => {
+    setTouched(true);
+    setAnswer(a);
+  };
 
   return (
     <div className="hp">
@@ -49,14 +66,14 @@ export default function HeroPhone({ t }: { t: Dict["hero"]["phone"] }) {
 
           {answer === "none" ? (
             <div className="inv-actions">
-              <button className="inv-yes" onClick={() => setAnswer("yes")}>{t.yes}</button>
-              <button className="inv-no" onClick={() => setAnswer("no")}>{t.no}</button>
+              <button className="inv-yes" onClick={() => reply("yes")}>{t.yes}</button>
+              <button className="inv-no" onClick={() => reply("no")}>{t.no}</button>
             </div>
           ) : (
             <div className={`inv-done ${answer === "yes" ? "is-yes" : ""}`}>
               <span className="inv-check" aria-hidden="true">{answer === "yes" ? "✓" : "–"}</span>
               <p>{answer === "yes" ? t.yesDone : t.noDone}</p>
-              <button onClick={() => setAnswer("none")}>{t.change}</button>
+              <button onClick={() => reply("none")}>{t.change}</button>
             </div>
           )}
         </div>

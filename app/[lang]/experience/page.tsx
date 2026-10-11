@@ -42,7 +42,19 @@ export default async function ExperiencePage({ params }: PageProps<"/[lang]/expe
         </div>
       </section>
 
-
+      <section className="sec swap">
+        <div className="wrap">
+          <h2 className="h3">{x.changeTitle}</h2>
+          <ul className="swap-list">
+            {x.changes.map((c) => (
+              <li key={c.from}>
+                <s>{c.from}</s>
+                <strong>{c.to}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section className="vision">
         <div className="wrap">

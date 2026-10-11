@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Dict } from "@/lib/i18n";
 
-/** Three-stop timeline: a hairline draws itself once, then each stop lights up in turn. */
+/** Compact three-stop timeline: one hairline, three short lines. */
 export default function Phases({ t }: { t: Dict["phases"] }) {
   const ref = useRef<HTMLElement>(null);
   const [seen, setSeen] = useState(false);
@@ -27,23 +27,13 @@ export default function Phases({ t }: { t: Dict["phases"] }) {
   return (
     <section className={`tl ${seen ? "is-in" : ""}`} ref={ref}>
       <div className="wrap">
-        <header className="tl-top">
-          <h2 className="tl-title">{t.title}</h2>
-          <p className="tl-lead">{t.text}</p>
-        </header>
-
+        <h2 className="tl-title">{t.title}</h2>
         <ol className="tl-list">
           {t.items.map((it, i) => (
             <li key={it.name} className="tl-item" style={{ ["--i" as string]: i }}>
               <span className="tl-dot" aria-hidden="true" />
               <h3 className="tl-name">{it.name}</h3>
               <p className="tl-head">{it.title}</p>
-              <p className="tl-text">{it.text}</p>
-              <ul className="tl-points">
-                {it.bullets.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
             </li>
           ))}
         </ol>

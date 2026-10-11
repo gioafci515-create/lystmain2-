@@ -4,7 +4,7 @@ import { getDict, hasLocale } from "@/lib/i18n";
 import HeroPhone from "@/components/HeroPhone";
 import Statement from "@/components/Statement";
 import Phases from "@/components/Phases";
-import Bento from "@/components/Bento";
+import Features from "@/components/Features";
 import CtaBand from "@/components/CtaBand";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
@@ -18,7 +18,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <div className="hero-grid-lines" aria-hidden="true" />
         <div className="wrap hero-body">
           <div className="hero-copy">
-            <div className="mark hero-mark" aria-hidden="true">lyst.</div>
+            <div className="mark hero-mark" aria-hidden="true"><span>lyst.</span></div>
             <h1 className="hero-title">
               {d.hero.lines.map((line, i) => (
                 <span className="mask" key={line}>
@@ -40,7 +40,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
       <Statement text={d.statement.text} cta={d.statement.cta} href={`/${lang}/catalog`} />
       <Phases t={d.phases} />
-      <Bento t={d.bento} />
+      <Features t={d.bento} />
 
 
       <CtaBand lang={lang} d={d} />
