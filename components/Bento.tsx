@@ -55,7 +55,7 @@ export default function Bento({ t }: { t: Dict["bento"] }) {
           <h2 className="h2">{t.title}</h2>
         </header>
         <div className="bento-grid">
-          {t.items.map((it) => (
+          {t.items.slice(0, 4).map((it) => (
             <article key={it.id} className={`tile tile-${it.id}`}>
               <Art id={it.id} />
               <div className="tile-copy">

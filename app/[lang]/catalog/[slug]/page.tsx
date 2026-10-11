@@ -5,7 +5,6 @@ import { getDict, hasLocale, locales } from "@/lib/i18n";
 import { invites } from "@/lib/site";
 import Phone from "@/components/Phone";
 import LiveFrame from "@/components/LiveFrame";
-import CtaBand from "@/components/CtaBand";
 
 export function generateStaticParams() {
   return locales.flatMap((lang) => invites.map((i) => ({ lang, slug: i.slug })));
@@ -90,7 +89,6 @@ export default async function InvitePage({ params }: PageProps<"/[lang]/catalog/
         </div>
       </section>
 
-      <CtaBand lang={lang} d={d} />
     </>
   );
 }

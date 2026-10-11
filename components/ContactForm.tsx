@@ -79,10 +79,6 @@ export default function ContactForm({ t }: { t: Dict["contact"]["form"] }) {
         <textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} placeholder={t.notePh} />
       </label>
 
-      <div className="preview">
-        <span>{t.preview}</span>
-        <pre>{message}</pre>
-      </div>
 
       <div className="form-actions">
         <button type="submit" className="btn btn-ink">{t.send}</button>

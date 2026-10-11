@@ -47,35 +47,6 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
         </div>
       </section>
 
-      <section className="sec compare">
-        <div className="wrap">
-          <h2 className="h3">{p.compareTitle}</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col"><span className="sr">{p.compareTitle}</span></th>
-                  {p.compareCols.map((c) => (
-                    <th scope="col" key={c}>{c}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {p.compareRows.map((r) => (
-                  <tr key={r.label}>
-                    <th scope="row">{r.label}</th>
-                    {r.values.map((v, i) => (
-                      <td key={i}>
-                        {v === true ? <span className="yes" aria-label="✓">✓</span> : v === false ? <span className="no" aria-label="—">—</span> : v}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
 
       <section className="sec faq-sec">
         <div className="wrap faq-grid">

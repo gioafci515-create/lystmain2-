@@ -18,6 +18,14 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
   const pathname = usePathname() ?? `/${lang}`;
   const rest = pathname.replace(/^\/(ge|en|ru)/, "") || "";
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 24);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -30,6 +38,12 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
   }, [open]);
 
   const isActive = (href: string) => (href === "" ? rest === "" : rest.startsWith(href));
+
+  // Already on the homepage: the link does not navigate, so scroll to the top instead.
+  const onLogo = () => {
+    setOpen(false);
+    if (rest === "") window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const switcher = (
     <div className="lang" role="group" aria-label="Language">
@@ -49,10 +63,9 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
 
   return (
     <>
-      {/* mix-blend-mode: difference keeps the bar legible over any section */}
-      <header className={`hdr ${open ? "is-open" : ""}`}>
+      <header className={`hdr ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}>
         <div className="hdr-in">
-          <Link href={`/${lang}`} className="hdr-logo" onClick={() => setOpen(false)}>
+          <Link href={`/${lang}`} className="hdr-logo" onClick={onLogo} aria-label="Lyst — home">
             <Logo />
           </Link>
           <nav className="hdr-nav" aria-label="Main">
@@ -63,22 +76,24 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
                 className={isActive(l.href) ? "is-on" : ""}
                 aria-current={isActive(l.href) ? "page" : undefined}
               >
-                {nav[l.key]}
+                <span>{nav[l.key]}</span>
               </Link>
             ))}
           </nav>
           <div className="hdr-right">
             <div className="hdr-lang">{switcher}</div>
-            <Link href={`/${lang}/contact`} className="hdr-cta">
-              {nav.cta} <span aria-hidden="true">↗</span>
+            <Link href={`/${lang}/contact`} className="btn btn-ink btn-sm hdr-cta">
+              {nav.cta}
             </Link>
             <button
               className="burger"
               aria-expanded={open}
               aria-controls="menu"
+              aria-label={open ? nav.close : nav.menu}
               onClick={() => setOpen((o) => !o)}
             >
-              {open ? nav.close : nav.menu}
+              <span />
+              <span />
             </button>
           </div>
         </div>

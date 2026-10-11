@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDict, hasLocale } from "@/lib/i18n";
-import Phases from "@/components/Phases";
-import Bento from "@/components/Bento";
 import CtaBand from "@/components/CtaBand";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/experience">): Promise<Metadata> {
@@ -44,24 +42,7 @@ export default async function ExperiencePage({ params }: PageProps<"/[lang]/expe
         </div>
       </section>
 
-      <Phases t={d.phases} />
 
-      <section className="sec sec-dark change">
-        <div className="wrap">
-          <h2 className="h2">{x.changeTitle}</h2>
-          <ul className="change-list">
-            {x.changes.map((c) => (
-              <li key={c.from}>
-                <s>{c.from}</s>
-                <span aria-hidden="true">→</span>
-                <strong>{c.to}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <Bento t={d.bento} />
 
       <section className="vision">
         <div className="wrap">

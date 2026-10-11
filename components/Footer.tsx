@@ -29,9 +29,6 @@ export default function Footer({ lang, d }: { lang: Locale; d: Dict }) {
           </ul>
         </div>
       </div>
-      <div className="wrap">
-        <div className="mark ftr-mark" aria-hidden="true">lyst.</div>
-      </div>
       <div className="wrap ftr-bottom">
         <span>{d.footer.rights}</span>
         <a href="#main" className="ftr-top">{d.footer.top} ↑</a>

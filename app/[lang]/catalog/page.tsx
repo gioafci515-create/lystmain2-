@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDict, hasLocale } from "@/lib/i18n";
 import CatalogGrid from "@/components/CatalogGrid";
-import CtaBand from "@/components/CtaBand";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/catalog">): Promise<Metadata> {
   const { lang } = await params;
@@ -28,7 +27,6 @@ export default async function CatalogPage({ params }: PageProps<"/[lang]/catalog
           <CatalogGrid lang={lang} d={d} />
         </div>
       </section>
-      <CtaBand lang={lang} d={d} />
     </>
   );
 }
