@@ -17,13 +17,13 @@ export default async function CatalogPage({ params }: PageProps<"/[lang]/catalog
 
   return (
     <>
-      <section className="page-hero">
+      <section className="page-hero page-hero-dark">
         <div className="wrap">
           <h1 className="page-title">{d.catalog.title}</h1>
           <p className="lead">{d.catalog.intro}</p>
         </div>
       </section>
-      <section className="catalog">
+      <section className="catalog catalog-dark">
         <div className="wrap">
           <CatalogGrid lang={lang} d={d} />
         </div>

@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 import { getDict, hasLocale } from "@/lib/i18n";
 import { invites } from "@/lib/site";
 import HeroPhone from "@/components/HeroPhone";
-import Marquee from "@/components/Marquee";
+import Statement from "@/components/Statement";
 import Phases from "@/components/Phases";
-import ShowcaseRail from "@/components/ShowcaseRail";
 import Bento from "@/components/Bento";
 import HostPanel from "@/components/HostPanel";
 import CtaBand from "@/components/CtaBand";
@@ -19,9 +18,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <>
       <section className="hero">
-        <div className="hero-grain" aria-hidden="true" />
-        <div className="wrap hero-grid">
+        <div className="hero-grid-lines" aria-hidden="true" />
+        <div className="wrap hero-body">
           <div className="hero-copy">
+            <div className="mark hero-mark" aria-hidden="true">lyst.</div>
             <h1 className="hero-title">
               {d.hero.lines.map((line, i) => (
                 <span className="mask" key={line}>
@@ -31,8 +31,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             </h1>
             <p className="hero-sub">{d.hero.sub}</p>
             <div className="hero-actions">
-              <Link href={`/${lang}/contact`} className="btn btn-ink">{d.hero.primary}</Link>
-              <Link href={`/${lang}/catalog`} className="btn btn-line">{d.hero.secondary}</Link>
+              <Link href={`/${lang}/contact`} className="btn btn-paper">{d.hero.primary}</Link>
+              <Link href={`/${lang}/catalog`} className="btn btn-ghost">{d.hero.secondary}</Link>
             </div>
             <p className="hero-hint"><span aria-hidden="true">↗</span> {d.hero.hint}</p>
           </div>
@@ -42,9 +42,8 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      <Marquee words={d.marquee} />
+      <Statement text={d.statement.text} cta={d.statement.cta} href={`/${lang}/catalog`} />
       <Phases t={d.phases} />
-      <ShowcaseRail lang={lang} d={d} />
       <Bento t={d.bento} />
       <HostPanel t={d.host} />
 

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function MobileCta({ lang, label }: { lang: string; label: string }) {
   const pathname = usePathname() ?? "";
   const [show, setShow] = useState(false);
-  const hidden = pathname.endsWith("/contact");
+  const hidden = pathname.endsWith("/contact") || pathname.includes("/catalog");
 
   useEffect(() => {
     const on = () => setShow(window.scrollY > 520);

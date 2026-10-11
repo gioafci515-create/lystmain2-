@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Logo from "./Logo";
 import { site } from "@/lib/site";
 import type { Dict, Locale } from "@/lib/i18n";
 
@@ -9,7 +8,6 @@ export default function Footer({ lang, d }: { lang: Locale; d: Dict }) {
     <footer className="ftr">
       <div className="wrap ftr-grid">
         <div className="ftr-brand">
-          <Logo className="ftr-logo-sm" />
           <p>{d.footer.tagline}</p>
           <p className="ftr-studio">{d.footer.studio}</p>
         </div>
@@ -26,15 +24,17 @@ export default function Footer({ lang, d }: { lang: Locale; d: Dict }) {
         <div>
           <h3>{d.footer.social}</h3>
           <ul>
-            <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href={site.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+            <li><a href={site.tiktok} target="_blank" rel="noopener noreferrer">TikTok ↗</a></li>
           </ul>
         </div>
       </div>
-      <div className="ftr-mark" aria-hidden="true">Lyst.</div>
+      <div className="wrap">
+        <div className="mark ftr-mark" aria-hidden="true">lyst.</div>
+      </div>
       <div className="wrap ftr-bottom">
         <span>{d.footer.rights}</span>
-        <a href="#main" className="ftr-top">{d.footer.top}</a>
+        <a href="#main" className="ftr-top">{d.footer.top} ↑</a>
       </div>
     </footer>
   );

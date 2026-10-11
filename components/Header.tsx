@@ -18,14 +18,6 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
   const pathname = usePathname() ?? `/${lang}`;
   const rest = pathname.replace(/^\/(ge|en|ru)/, "") || "";
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 24);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -57,7 +49,8 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
 
   return (
     <>
-      <header className={`hdr ${scrolled ? "is-scrolled" : ""} ${open ? "is-open" : ""}`}>
+      {/* mix-blend-mode: difference keeps the bar legible over any section */}
+      <header className={`hdr ${open ? "is-open" : ""}`}>
         <div className="hdr-in">
           <Link href={`/${lang}`} className="hdr-logo" onClick={() => setOpen(false)}>
             <Logo />
@@ -76,18 +69,16 @@ export default function Header({ lang, nav }: { lang: Locale; nav: Dict["nav"] }
           </nav>
           <div className="hdr-right">
             <div className="hdr-lang">{switcher}</div>
-            <Link href={`/${lang}/contact`} className="btn btn-ink btn-sm hdr-cta">
-              {nav.cta}
+            <Link href={`/${lang}/contact`} className="hdr-cta">
+              {nav.cta} <span aria-hidden="true">↗</span>
             </Link>
             <button
               className="burger"
               aria-expanded={open}
               aria-controls="menu"
-              aria-label={open ? nav.close : nav.menu}
               onClick={() => setOpen((o) => !o)}
             >
-              <span />
-              <span />
+              {open ? nav.close : nav.menu}
             </button>
           </div>
         </div>

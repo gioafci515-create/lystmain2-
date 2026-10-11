@@ -8,6 +8,7 @@ export const en: D = {
     description:
       "Digital invitations, RSVP and guest experiences on a single link. Weddings, brand events, parties — made with Lyst.",
   },
+  statement: { text: "We turn an invitation into a living experience — one link, every guest, one evening worth remembering.", cta: "Catalog" },
   nav: {
     home: "Home",
     catalog: "Catalog",
@@ -30,6 +31,9 @@ export const en: D = {
     demo: "Live demo",
     next: "Next",
     prev: "Previous",
+    try: "Try it",
+    stop: "Done",
+    tapTry: "Tap to try",
   },
   hero: {
     lines: ["Invite", "smarter."],
@@ -140,6 +144,7 @@ export const en: D = {
   catalog: {
     title: "Catalog",
     intro: "The invitations we've already made. Each one is a live page — open it and try.",
+    views: { grid: "Grid", reel: "Reel" },
     filters: { all: "All", wedding: "Wedding", brand: "Brand", party: "Party" },
     count: "invitations",
     empty: "No invitations in this category yet. Message us and we'll make the first one.",
